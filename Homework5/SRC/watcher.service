@@ -1,0 +1,12 @@
+[Unit]
+Description=Homework5 Watcher Service
+After=network.target
+
+[Service]
+ExecStart=/home/mkulyk/DANit13/Homework5/SRC/watcher.sh
+Restart=always
+RestartSec=3
+User=mkulyk
+
+[Install]
+WantedBy=multi-user.target
