@@ -1,0 +1,5 @@
+Port 3333
+PermitRootLogin no
+PasswordAuthentication yes
+PubkeyAuthentication yes
+LogLevel DEBUG
