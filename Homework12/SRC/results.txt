@@ -1,0 +1,152 @@
+GET all students (start) -> 200: [
+  {
+    "id": "2",
+    "name": "Ivan",
+    "rank": "A"
+  }
+]
+
+POST add Ivan -> 201: {
+  "id": "2",
+  "message": "Student added"
+}
+
+POST add Petro -> 201: {
+  "id": "3",
+  "message": "Student added"
+}
+
+POST add Oksana -> 201: {
+  "id": "4",
+  "message": "Student added"
+}
+
+GET all students (after POST) -> 200: [
+  {
+    "id": "2",
+    "name": "Ivan",
+    "rank": "A"
+  },
+  {
+    "id": "2",
+    "name": "Ivan",
+    "rank": "A"
+  },
+  {
+    "id": "3",
+    "name": "Petro",
+    "rank": "B"
+  },
+  {
+    "id": "4",
+    "name": "Oksana",
+    "rank": "C"
+  }
+]
+
+PATCH update rank of student 2 -> 200: {
+  "id": "2",
+  "message": "Student partially updated"
+}
+
+GET all students (check student 2) -> 200: [
+  {
+    "id": "2",
+    "name": "Ivan",
+    "rank": "D"
+  },
+  {
+    "id": "2",
+    "name": "Ivan",
+    "rank": "D"
+  },
+  {
+    "id": "3",
+    "name": "Petro",
+    "rank": "B"
+  },
+  {
+    "id": "4",
+    "name": "Oksana",
+    "rank": "C"
+  }
+]
+
+PUT update student 3 -> 200: {
+  "id": "3",
+  "message": "Student updated"
+}
+
+GET all students (check student 3) -> 200: [
+  {
+    "id": "2",
+    "name": "Ivan",
+    "rank": "D"
+  },
+  {
+    "id": "2",
+    "name": "Ivan",
+    "rank": "D"
+  },
+  {
+    "id": "3",
+    "name": "Oksana Updated",
+    "rank": "E"
+  },
+  {
+    "id": "4",
+    "name": "Oksana",
+    "rank": "C"
+  }
+]
+
+GET all students (before DELETE) -> 200: [
+  {
+    "id": "2",
+    "name": "Ivan",
+    "rank": "D"
+  },
+  {
+    "id": "2",
+    "name": "Ivan",
+    "rank": "D"
+  },
+  {
+    "id": "3",
+    "name": "Oksana Updated",
+    "rank": "E"
+  },
+  {
+    "id": "4",
+    "name": "Oksana",
+    "rank": "C"
+  }
+]
+
+DELETE student 1 -> 404: {
+  "error": "Student not found"
+}
+
+GET all students (final) -> 200: [
+  {
+    "id": "2",
+    "name": "Ivan",
+    "rank": "D"
+  },
+  {
+    "id": "2",
+    "name": "Ivan",
+    "rank": "D"
+  },
+  {
+    "id": "3",
+    "name": "Oksana Updated",
+    "rank": "E"
+  },
+  {
+    "id": "4",
+    "name": "Oksana",
+    "rank": "C"
+  }
+]
+
