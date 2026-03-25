@@ -65,8 +65,6 @@ def update_student(id):
 
     return jsonify({"message": "Student updated", "id": id}), 200
 
-if __name__ == "__main__":
-    app.run(debug=True)
 # PATCH: оновити окремі поля студента за ID
 @app.route("/students/<id>", methods=["PATCH"])
 def patch_student(id):
@@ -81,7 +79,6 @@ def patch_student(id):
         reader = csv.DictReader(f)
         for row in reader:
             if row["id"] == id:
-                # оновлюємо лише ті поля, які передані
                 if "name" in data:
                     row["name"] = data["name"]
                 if "rank" in data:
@@ -98,3 +95,30 @@ def patch_student(id):
         writer.writerows(students)
 
     return jsonify({"message": "Student partially updated", "id": id}), 200
+
+# DELETE: видалити студента за ID
+@app.route("/students/<id>", methods=["DELETE"])
+def delete_student(id):
+    deleted = False
+    students = []
+
+    with open(FILE, newline="") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            if row["id"] == id:
+                deleted = True
+                continue
+            students.append(row)
+
+    if not deleted:
+        return jsonify({"error": "Student not found"}), 404
+
+    with open(FILE, "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=["id", "name", "rank"])
+        writer.writeheader()
+        writer.writerows(students)
+
+    return jsonify({"message": "Student deleted", "id": id}), 200
+
+if __name__ == "__main__":
+    app.run(debug=True)
