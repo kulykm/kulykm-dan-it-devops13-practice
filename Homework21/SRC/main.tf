@@ -7,6 +7,7 @@ resource "aws_instance" "web" {
   ami           = "ami-002cae6b67f1a7688"
   instance_type = "t2.micro"
   key_name      = "maxim-key"
+  vpc_security_group_ids = ["sg-0c3e6bff981cedfaa"]
 
   tags = {
     Name = "HW21-${count.index}"
