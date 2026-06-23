@@ -1,0 +1,29 @@
+---
+- hosts: webservers
+  become: yes
+  tasks:
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+
+    - name: Install Docker Compose
+      apt:
+        name: docker-compose
+        state: present
+
+    - name: Create docker-compose.yml
+      copy:
+        dest: /home/ubuntu/docker-compose.yml
+        content: |
+          version: '3'
+          services:
+            nginx:
+              image: nginx
+              ports:
+                - "80:80"
+
+    - name: Start Nginx with Docker Compose
+      command: docker-compose -f /home/ubuntu/docker-compose.yml up -d
