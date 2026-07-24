@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-random-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: python-random
+  template:
+    metadata:
+      labels:
+        app: python-random
+    spec:
+      containers:
+      - name: python-random
+        image: kulykm/python-random:hw24
+        ports:
+        - containerPort: 8082
